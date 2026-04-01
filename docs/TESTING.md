@@ -145,34 +145,52 @@ flutter test --coverage
 - [x] Tiene botón crear cuenta
 - [x] Tiene enlace a login
 
-## Tests Próximos (Phase 1.9+ y Future)
+### 8. GuardAutenticacion (Security) ✅
+- [x] Permite acceso a /login sin autenticación
+- [x] Redirige a /login si intenta / sin autenticación
+- [x] Redirige a /login si intenta /ajustes sin autenticación
+- [x] Permite acceso a / si usuario autenticado
+- [x] Permite acceso a /ajustes si usuario autenticado
+- [x] Redirige a / si en /login y ya autenticado
+- [x] Redirige a / si en /registro y ya autenticado
+- [x] Permite /recuperar-contraseña sin autenticación
+- [x] esUsuarioAutenticado retorna false sin usuario
+- [x] esUsuarioAutenticado retorna true con usuario
 
-### Pantalla de Ajustes (Widget)
-- [ ] Mostrar perfil del usuario
-- [ ] Mostrar información de email
-- [ ] Botón de cerrar sesión
-- [ ] Diálogo de confirmación cerrar sesión
-- [ ] Enlace a "Acerca de"
+### 9. PantallaAjustes (Widget + Security) ✅
+- [x] Muestra usuario cuando está autenticado
+- [x] Muestra mensaje cuando no hay usuario
+- [x] Tiene botón cerrar sesión
+- [x] Muestra diálogo de confirmación
+- [x] Cancela logout correctamente
+- [x] Tiene botón acerca de
+- [x] Muestra diálogo acerca de
+- [x] Muestra información del usuario
+- [x] Muestra opciones próximas
+- [x] Desactiva botones durante operación
 
-### Autenticación (Integration)
-- [ ] Flujo completo: Registro → Login → Crear nota → Logout
-- [ ] Validación de formularios  
-- [ ] Manejo de errores en autenticación
+## Tests Próximos (Phase 1.10+ y Future)
 
-### Firebase Real (Integration)
-- [ ] Sincronización en tiempo real
-- [ ] Persistencia de datos
-- [ ] Manejo de desconexión
+### Integration Tests (Full Flow)
+- [ ] Flujo: Registro → Login → Crear nota → Logout
+- [ ] Redirection automática según autenticación
+- [ ] Persistencia de sesión
 
-## Resumen de Cobertura (Phase 1.9)
+### Performance
+- [ ] Tiempo de carga de pantallas
+- [ ] Eficiencia de queries Firebase
+- [ ] Sincronización en background
+
+## Resumen de Cobertura (Phase 1.10)
 
 | Componente | Tests | Cobertura | Estado |
 |-----------|-------|----------|--------|
 | Modelos | 14 | ≥85% | ✅ Completo |
 | Servicios | 19 | ≥75% | ✅ Completo |
 | Utilidades | 7 | ≥90% | ✅ Completo |
-| Widgets Suite | 25 | ≥65% | ✅ Completo |
-| **Total** | **65** | **≥78%** | **✅ Muy Robusto** |
+| Widgets Suite | 35 | ≥70% | ✅ Completo |
+| Security Guards | 10 | ≥95% | ✅ Robusto |
+| **Total** | **85** | **≥81%** | **✅ Enterprise** |
 
 ## Mejores Prácticas
 

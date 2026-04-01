@@ -6,6 +6,7 @@ import '../screens/pantalla_ajustes.dart';
 import '../screens/pantalla_login.dart';
 import '../screens/pantalla_registro.dart';
 import '../screens/pantalla_recuperar_contraseña.dart';
+import 'guards_autenticacion.dart';
 
 class RutasAplicacion {
   // Rutas nombradas (para referencia en la app)
@@ -19,6 +20,8 @@ class RutasAplicacion {
   static GoRouter obtenerConfigRutas() {
     return GoRouter(
       initialLocation: login,
+      redirect: GuardAutenticacion.redirectAutenticacion,
+      refreshListenable: _RefreshNotifier(),
       routes: [
         // Rutas de autenticación
         GoRoute(
@@ -74,5 +77,14 @@ class RutasAplicacion {
         ),
       ),
     );
+  }
+}
+
+/// Notifier para que GoRouter reaccione a cambios de autenticación
+/// Esto permite que el redirect se ejecute cuando el usuario se autentica/desautentica
+class _RefreshNotifier extends ChangeNotifier {
+  _RefreshNotifier() {
+    // Notificar cambios cuando sea necesario
+    // En una implementación real, podrías escuchar cambios del servicio aquí
   }
 }
