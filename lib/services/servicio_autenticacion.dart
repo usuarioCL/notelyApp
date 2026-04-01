@@ -116,6 +116,22 @@ class ServicioAutenticacion {
     await _auth.signOut();
   }
 
+  /// Envía un enlace de recuperación de contraseña al email especificado
+  ///
+  /// Parámetros:
+  /// - email: correo del usuario para recuperar contraseña
+  ///
+  /// Lanza excepción si hay error
+  Future<void> enviarEnlaceRecuperacionContraseña({
+    required String email,
+  }) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw _procesarErrorAutenticacion(e);
+    }
+  }
+
   /// Guarda el usuario en Firestore
   Future<void> _guardarUsuarioEnFirestore(Usuario usuario) async {
     await _firestore.collection('usuarios').doc(usuario.id).set(

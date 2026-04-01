@@ -115,7 +115,37 @@ flutter test --coverage
 - [x] Puede cambiar categoría
 - [x] Muestra estructura para indicador de carga
 
-## Tests Próximos (Phase 1.8++ y Future)
+## Tests Próximos (Phase 1.9 - Autenticación)
+
+### Validadores ✅
+- [x] Validar email con formato correcto
+- [x] Validar email vacío
+- [x] Validar email inválido
+- [x] Validar contraseña con requisitos
+- [x] Validar contraseña débil
+- [x] Validar confirmación de contraseña
+- [x] Validar nombre mostrado
+
+### PantallaLogin (Widget) ✅
+- [x] Muestra campos de email y contraseña
+- [x] Tiene botón de iniciar sesión
+- [x] Tiene enlace a registro
+- [x] Tiene opción mostrar/ocultar contraseña
+- [x] Permite escribir email
+- [x] Permite escribir contraseña
+- [x] Muestra enlace de recuperación
+- [x] Valida email en formulario
+- [x] Valida contraseña en formulario
+
+### PantallaRegistro (Widget) ✅
+- [x] Muestra campos requeridos (nombre, email, contraseña)
+- [x] Tiene indicadores de requisitos de contraseña
+- [x] Actualiza indicadores al escribir
+- [x] Valida campos requeridos
+- [x] Tiene botón crear cuenta
+- [x] Tiene enlace a login
+
+## Tests Próximos (Phase 1.9+ y Future)
 
 ### Pantalla de Ajustes (Widget)
 - [ ] Mostrar perfil del usuario
@@ -126,7 +156,7 @@ flutter test --coverage
 
 ### Autenticación (Integration)
 - [ ] Flujo completo: Registro → Login → Crear nota → Logout
-- [ ] Validación de formularios
+- [ ] Validación de formularios  
 - [ ] Manejo de errores en autenticación
 
 ### Firebase Real (Integration)
@@ -134,14 +164,15 @@ flutter test --coverage
 - [ ] Persistencia de datos
 - [ ] Manejo de desconexión
 
-## Resumen de Cobertura
+## Resumen de Cobertura (Phase 1.9)
 
 | Componente | Tests | Cobertura | Estado |
 |-----------|-------|----------|--------|
 | Modelos | 14 | ≥85% | ✅ Completo |
 | Servicios | 19 | ≥75% | ✅ Completo |
-| Widgets | 18 | ≥60% | ✅ Completo |
-| **Total** | **51** | **≥73%** | **✅ Robusto** |
+| Utilidades | 7 | ≥90% | ✅ Completo |
+| Widgets Suite | 25 | ≥65% | ✅ Completo |
+| **Total** | **65** | **≥78%** | **✅ Muy Robusto** |
 
 ## Mejores Prácticas
 

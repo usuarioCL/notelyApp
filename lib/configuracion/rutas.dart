@@ -3,17 +3,44 @@ import 'package:go_router/go_router.dart';
 import '../screens/pantalla_inicio.dart';
 import '../screens/editor_nota.dart';
 import '../screens/pantalla_ajustes.dart';
+import '../screens/pantalla_login.dart';
+import '../screens/pantalla_registro.dart';
+import '../screens/pantalla_recuperar_contraseña.dart';
 
 class RutasAplicacion {
   // Rutas nombradas (para referencia en la app)
   static const String inicio = '/';
+  static const String login = '/login';
+  static const String registro = '/registro';
+  static const String recuperarContraseña = '/recuperar-contraseña';
   static const String editorNota = '/editor-nota';
   static const String ajustes = '/ajustes';
 
   static GoRouter obtenerConfigRutas() {
     return GoRouter(
-      initialLocation: inicio,
+      initialLocation: login,
       routes: [
+        // Rutas de autenticación
+        GoRoute(
+          path: login,
+          name: 'login',
+          builder: (context, state) => const PantallaLogin(),
+        ),
+        GoRoute(
+          path: registro,
+          name: 'registro',
+          builder: (context, state) => const PantallaRegistro(),
+        ),
+        GoRoute(
+          path: recuperarContraseña,
+          name: 'recuperarContraseña',
+          builder: (context, state) {
+            final email = state.extra as String?;
+            return PantallaRecuperarContraseña(emailInicial: email);
+          },
+        ),
+        
+        // Rutas principales
         GoRoute(
           path: inicio,
           name: 'inicio',
