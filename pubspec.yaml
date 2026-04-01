@@ -14,6 +14,9 @@ dependencies:
   # Estado y gestión
   provider: ^6.0.0
 
+  # Navegación
+  go_router: ^13.0.0
+
   # Firebase
   firebase_core: ^2.24.0
   cloud_firestore: ^4.13.0

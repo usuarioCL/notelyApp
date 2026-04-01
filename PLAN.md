@@ -12,6 +12,9 @@ Construir una aplicación multiplataforma de notas con sincronización en tiempo
 | Backend | Firebase (Firestore + Auth) |
 | MVP Features | Notas de texto simple (crear, editar, guardar) |
 | Rastreo | Git + commits descriptivos + documentación |
+| Idioma | Español (commits, documentación, comentarios) |
+| Gestor de Estado | **Provider** (moderno y simple) |
+| Navegación | **Go Router** (para Flutter 3.0+) |
 | Documentación | Completa en cada etapa |
 | Proceso | Paso a paso, consultando antes de cada decisión |
 
