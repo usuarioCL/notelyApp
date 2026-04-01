@@ -1,0 +1,38 @@
+# Flutter
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+*.iml
+*.lock
+pubspec.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Firebase
+firebase_config/google-services.json
+firebase_config/GoogleService-Info.plist
+
+# Environment variables
+.env
+.env.local
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Generated files
+generated_plugin_registrant.dart
+
+# Coverage
+coverage/
+
+# Dart
+.packages
+.pub-cache/
