@@ -10,6 +10,13 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/).
 - Inicialización del proyecto con estructura base
 - Documentación: README.md, PLAN.md, CHANGELOG.md
 - Estructura de carpetas (lib/, docs/, firebase_config/)
+- **Modelos de datos** (Phase 1.3):
+  - `Note` model con campos: id, userId, title, content, category, createdAt, updatedAt, isDeleted
+  - `User` model con campos: id, email, displayName, createdAt
+  - Métodos toJson/fromJson para serialización Firebase
+  - Patrón copyWith para modificaciones inmutables
+- Documentación de modelos en `docs/DATA_MODEL.md`
+- Categorías predefinidas: General, Personal, Trabajo, Ideas
 
 ### Changed
 - N/A

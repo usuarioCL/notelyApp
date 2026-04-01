@@ -73,11 +73,18 @@ class Note {
   String userId;          // Usuario propietario
   String title;           // Título
   String content;         // Contenido (texto plano)
+  String category;        // Categoría (Personal, Trabajo, Ideas, etc.)
   DateTime createdAt;     // Fecha creación
   DateTime updatedAt;     // Última actualización
   bool isDeleted;         // Soft delete
 }
 ```
+
+**Categorías disponibles (MVP)**:
+- "General" (default)
+- "Personal"
+- "Trabajo"
+- "Ideas"
 
 ### User
 ```dart
