@@ -3,54 +3,54 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 /// Modelo de datos para un Usuario
 ///
 /// Almacena información del usuario autenticado
-class User {
+class Usuario {
   final String id;              // ID único (Firebase Auth UID)
   final String email;           // Email del usuario
-  final String displayName;     // Nombre mostrado
-  final DateTime createdAt;     // Fecha de creación de cuenta
+  final String nombreMostrado;  // Nombre mostrado del usuario
+  final DateTime creadoEn;      // Fecha de creación de cuenta
 
-  User({
+  Usuario({
     required this.id,
     required this.email,
-    required this.displayName,
-    required this.createdAt,
+    required this.nombreMostrado,
+    required this.creadoEn,
   });
 
   /// Convierte el modelo a JSON para Firestore
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> aJson() {
     return {
       'id': id,
       'email': email,
-      'displayName': displayName,
-      'createdAt': Timestamp.fromDate(createdAt),
+      'nombreMostrado': nombreMostrado,
+      'creadoEn': Timestamp.fromDate(creadoEn),
     };
   }
 
   /// Crea un modelo desde JSON de Firestore
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
+  factory Usuario.desdeJson(Map<String, dynamic> json) {
+    return Usuario(
       id: json['id'] ?? '',
       email: json['email'] ?? '',
-      displayName: json['displayName'] ?? 'Usuario',
-      createdAt: (json['createdAt'] as Timestamp).toDate(),
+      nombreMostrado: json['nombreMostrado'] ?? 'Usuario',
+      creadoEn: (json['creadoEn'] as Timestamp).toDate(),
     );
   }
 
   /// Crea una copia con cambios específicos
-  User copyWith({
+  Usuario copiarCon({
     String? id,
     String? email,
-    String? displayName,
-    DateTime? createdAt,
+    String? nombreMostrado,
+    DateTime? creadoEn,
   }) {
-    return User(
+    return Usuario(
       id: id ?? this.id,
       email: email ?? this.email,
-      displayName: displayName ?? this.displayName,
-      createdAt: createdAt ?? this.createdAt,
+      nombreMostrado: nombreMostrado ?? this.nombreMostrado,
+      creadoEn: creadoEn ?? this.creadoEn,
     );
   }
 
   @override
-  String toString() => 'User(id: $id, email: $email, displayName: $displayName)';
+  String toString() => 'Usuario(id: $id, email: $email, nombreMostrado: $nombreMostrado)';
 }

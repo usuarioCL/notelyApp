@@ -7,77 +7,81 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 /// - Metadatos: fechas de creación y actualización
 /// - Categoría: para organización básica
 /// - Soft delete: para recuperación posterior
-class Note {
+class Nota {
   final String id;              // ID único generado por Firebase
-  final String userId;          // Usuario propietario
-  final String title;           // Título de la nota
-  final String content;         // Contenido (texto plano - MVP)
-  final String category;        // Categoría para organizar (nuevo)
-  final DateTime createdAt;     // Fecha de creación
-  final DateTime updatedAt;     // Última actualización
-  final bool isDeleted;         // Soft delete (no borrar físicamente)
+  final String usuarioId;       // ID del usuario propietario
+  final String titulo;          // Título de la nota
+  final String contenido;       // Contenido (texto plano - MVP)
+  final String categoria;       // Categoría para organizar
+  final DateTime creadoEn;      // Timestamp de creación
+  final DateTime actualizadoEn; // Timestamp de última actualización
+  final bool eliminado;         // Flag para soft delete
 
-  Note({
+  Nota({
     required this.id,
-    required this.userId,
-    required this.title,
-    required this.content,
-    required this.category,
-    required this.createdAt,
-    required this.updatedAt,
-    this.isDeleted = false,
+    required this.usuarioId,
+    required this.titulo,
+    required this.contenido,
+    required this.categoria,
+    required this.creadoEn,
+    required this.actualizadoEn,
+    this.eliminado = false,
   });
 
   /// Convierte el modelo a JSON para Firestore
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> aJson() {
     return {
       'id': id,
-      'userId': userId,
-      'title': title,
-      'content': content,
-      'category': category,
-      'createdAt': Timestamp.fromDate(createdAt),
-      'updatedAt': Timestamp.fromDate(updatedAt),
-      'isDeleted': isDeleted,
+      'usuarioId': usuarioId,
+      'titulo': titulo,
+      'contenido': contenido,
+      'categoria': categoria,
+      'creadoEn': Timestamp.fromDate(creadoEn),
+      'actualizadoEn': Timestamp.fromDate(actualizadoEn),
+      'eliminado': eliminado,
     };
   }
 
   /// Crea un modelo desde JSON de Firestore
-  factory Note.fromJson(Map<String, dynamic> json) {
-    return Note(
+  factory Nota.desdeJson(Map<String, dynamic> json) {
+    return Nota(
       id: json['id'] ?? '',
-      userId: json['userId'] ?? '',
-      title: json['title'] ?? 'Sin título',
-      content: json['content'] ?? '',
-      category: json['category'] ?? 'General',
-      createdAt: (json['createdAt'] as Timestamp).toDate(),
-      updatedAt: (json['updatedAt'] as Timestamp).toDate(),
-      isDeleted: json['isDeleted'] ?? false,
+      usuarioId: json['usuarioId'] ?? '',
+      titulo: json['titulo'] ?? 'Sin título',
+      contenido: json['contenido'] ?? '',
+      categoria: json['categoria'] ?? 'General',
+      creadoEn: (json['creadoEn'] as Timestamp).toDate(),
+      actualizadoEn: (json['actualizadoEn'] as Timestamp).toDate(),
+      eliminado: json['eliminado'] ?? false,
     );
   }
 
   /// Crea una copia con cambios específicos (copyWith pattern)
-  Note copyWith({
+  Nota copiarCon({
     String? id,
-    String? userId,
-    String? title,
-    String? content,
-    String? category,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-    bool? isDeleted,
+    String? usuarioId,
+    String? titulo,
+    String? contenido,
+    String? categoria,
+    DateTime? creadoEn,
+    DateTime? actualizadoEn,
+    bool? eliminado,
   }) {
-    return Note(
+    return Nota(
       id: id ?? this.id,
-      userId: userId ?? this.userId,
-      title: title ?? this.title,
-      content: content ?? this.content,
-      category: category ?? this.category,
-      createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
-      isDeleted: isDeleted ?? this.isDeleted,
+      usuarioId: usuarioId ?? this.usuarioId,
+      titulo: titulo ?? this.titulo,
+      contenido: contenido ?? this.contenido,
+      categoria: categoria ?? this.categoria,
+      creadoEn: creadoEn ?? this.creadoEn,
+      actualizadoEn: actualizadoEn ?? this.actualizadoEn,
+      eliminado: eliminado ?? this.eliminado,
     );
   }
+
+  @override
+  String toString() => 'Nota(id: $id, titulo: $titulo, categoria: $categoria)';
+}
 
   @override
   String toString() => 'Note(id: $id, title: $title, category: $category)';

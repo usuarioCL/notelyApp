@@ -24,12 +24,12 @@ Construir una aplicación multiplataforma de notas con sincronización en tiempo
 
 ```
 ├─ 1.1: Definir MVP ✅
-├─ 1.2: Inicializar estructura del proyecto ✅ (AQUÍ)
-├─ 1.3: Diseñar modelo de datos
-├─ 1.4: Frontend - Pantalla de listado
-├─ 1.5: Frontend - Editor de notas
-├─ 1.6: Backend - Integración Firebase
-├─ 1.7: Sincronización básica
+├─ 1.2: Inicializar estructura del proyecto ✅
+├─ 1.3: Diseñar modelo de datos ✅
+├─ 1.4: Frontend - Pantallas básicas ✅
+├─ 1.5: Backend - Servicios Firebase ✅ (AQUÍ)
+├─ 1.6: Integración Frontend-Backend
+├─ 1.7: Sincronización en tiempo real
 └─ 1.8: Testing MVP
 ```
 
@@ -48,18 +48,18 @@ Construir una aplicación multiplataforma de notas con sincronización en tiempo
 ### Capas
 
 1. **Presentation Layer**
-   - Screens (HomeScreen, NoteEditor)
+   - Screens (PantallaInicio, EditorNota, PantallaAjustes)
    - Widgets reutilizables
-   - State management (Provider/Riverpod)
+   - State management (Provider)
 
 2. **Domain Layer**
-   - Modelos de datos (Note, User)
+   - Modelos de datos (Nota, Usuario)
    - Casos de uso
 
 3. **Data Layer**
-   - Firebase Service
-   - Repositorios
-   - Cache local
+   - Servicios Firebase (ServicioAutenticacion, ServicioNotas, ServicioCategorias)
+   - Repositorios (en desarrollo)
+   - Cache local (futuro)
 
 ### Flujo de Datos
 

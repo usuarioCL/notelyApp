@@ -27,7 +27,17 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/).
   - PantallaAjustes: pantalla de configuración
   - Sistema de rutas con GoRouter configurado
 
-### Changed
+- **Servicios Firebase** (Fase 1.5):
+  - ServicioAutenticacion: registro, inicio/cierre de sesión, usuario actual
+  - ServicioNotas: CRUD completo, filtrado, búsqueda, soft delete
+  - ServicioCategorias: gestión de categorías disponibles
+  - Documentación detallada en `docs/SERVICIOS.md`
+  - Manejo de errores con mensajes descriptivos
+  - Métodos síncronos y asíncronos según corresponda
+
+### Cambiado
+- Actualizar todos los modelos a español: Nota (antes Note), Usuario (antes User)
+- Métodos renombrados a español: aJson/desdeJson, copiarCon
 - N/A
 
 ### Removed
