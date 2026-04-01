@@ -28,9 +28,9 @@ Construir una aplicación multiplataforma de notas con sincronización en tiempo
 ├─ 1.3: Diseñar modelo de datos ✅
 ├─ 1.4: Frontend - Pantallas básicas ✅
 ├─ 1.5: Backend - Servicios Firebase ✅
-├─ 1.6: Integración Frontend-Backend ✅ (AQUÍ)
+├─ 1.6: Integración Frontend-Backend ✅
 ├─ 1.7: Sincronización en tiempo real ✅
-└─ 1.8: Testing MVP ⏳
+└─ 1.8: Testing MVP ✅ (AQUÍ - En Progreso)
 ```
 
 ### Fase 2: Mejoras (Próxima)

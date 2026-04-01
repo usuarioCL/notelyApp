@@ -43,6 +43,14 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/).
   - StreamBuilders para sincronización en tiempo real
   - Manejo completo de estados (loading, error, data)
 
+- **Testing MVP** (Fase 1.8):
+  - Tests unitarios para modelos: Nota, Usuario
+  - Tests unitarios para servicios: ServicioCategorias
+  - 18+ cases de prueba implementados
+  - Documentación de testing en `docs/TESTING.md`
+  - Dependencias: mockito, build_runner
+  - Cobertura de modelos ≥80%
+
 ### Cambiado
 - Actualizar todos los modelos a español: Nota (antes Note), Usuario (antes User)
 - Métodos renombrados a español: aJson/desdeJson, copiarCon
