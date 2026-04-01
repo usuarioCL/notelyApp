@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import '../models/index.dart';
 import '../services/index.dart';
+import '../widgets/busqueda_avanzada.dart';
 
 /// Pantalla de inicio - Listado de notas
 ///
@@ -20,6 +21,11 @@ class PantallaInicio extends StatefulWidget {
 
 class _PantallaInicioState extends State<PantallaInicio> {
   String categoriaSeleccionada = 'Todas';
+  bool enBusqueda = false;
+  String terminoBusqueda = '';
+  List<String> categoriasSeleccionadas = [];
+
+  final List<String> categorias = ['Todas', 'General', 'Personal', 'Trabajo', 'Ideas'];
 
   @override
   Widget build(BuildContext context) {
@@ -32,22 +38,51 @@ class _PantallaInicioState extends State<PantallaInicio> {
         elevation: 0,
         actions: [
           IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () => setState(() => enBusqueda = !enBusqueda),
+            tooltip: 'Búsqueda avanzada',
+          ),
+          IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () => _irAjustes(context),
             tooltip: 'Ajustes',
           ),
         ],
       ),
-      body: usuario.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stack) => Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.error_outline, size: 48, color: Colors.red),
-              const SizedBox(height: 16),
-              Text('Error: $error'),
-            ],
+      body: Column(
+        children: [
+          // Búsqueda avanzada si está activa
+          if (enBusqueda)
+            BusquedaAvanzada(
+              onBuscar: (termino, categoriasFiltro) {
+                setState(() {
+                  terminoBusqueda = termino;
+                  categoriasSeleccionadas = categoriasFiltro;
+                });
+              },
+              categoriasDisponibles:
+                  categorias.where((c) => c != 'Todas').toList(),
+              onCancelar: () {
+                setState(() {
+                  enBusqueda = false;
+                  terminoBusqueda = '';
+                  categoriasSeleccionadas = [];
+                });
+              },
+            ),
+
+          // Contenido principal
+          Expanded(
+            child: usuario.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, stack) => Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.error_outline, size: 48, color: Colors.red),
+                    const SizedBox(height: 16),
+                    Text('Error: $error'),
+                  ],
           ),
         ),
         data: (usuarioActual) {

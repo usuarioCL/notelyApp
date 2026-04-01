@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import '../models/index.dart';
 import '../services/index.dart';
+import '../widgets/barra_formato.dart';
 
 /// Pantalla de editor de notas
 ///
@@ -24,9 +25,16 @@ class EditorNota extends StatefulWidget {
 class _EditorNotaState extends State<EditorNota> {
   late TextEditingController controladorTitulo;
   late TextEditingController controladorContenido;
+  late FocusNode focusNodeContenido;
+  
   String categoriaSeleccionada = 'General';
   bool cargando = false;
   bool editando = false;
+
+  // Estados de formato
+  bool negrita = false;
+  bool cursiva = false;
+  bool subrayado = false;
 
   final List<String> categorias = ['General', 'Personal', 'Trabajo', 'Ideas'];
 
@@ -35,6 +43,7 @@ class _EditorNotaState extends State<EditorNota> {
     super.initState();
     controladorTitulo = TextEditingController();
     controladorContenido = TextEditingController();
+    focusNodeContenido = FocusNode();
 
     // Si es edición, cargar datos
     if (widget.notaId != null) {
@@ -46,6 +55,7 @@ class _EditorNotaState extends State<EditorNota> {
   void dispose() {
     controladorTitulo.dispose();
     controladorContenido.dispose();
+    focusNodeContenido.dispose();
     super.dispose();
   }
 
@@ -83,48 +93,81 @@ class _EditorNotaState extends State<EditorNota> {
               ),
           ],
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Campo de título
-                TextField(
-                  controller: controladorTitulo,
-                  enabled: !cargando,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                  decoration: InputDecoration(
-                    hintText: 'Título de la nota',
-                    border: InputBorder.none,
-                    enabled: !cargando,
-                  ),
-                ),
-                const SizedBox(height: 16),
-
-                // Selector de categoría
-                _construirSelectorCategoria(),
-                const SizedBox(height: 16),
-
-                // Campo de contenido
-                TextField(
-                  controller: controladorContenido,
-                  enabled: !cargando,
-                  maxLines: null,
-                  minLines: 15,
-                  decoration: InputDecoration(
-                    hintText: 'Escribe tu nota aquí...',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    enabled: !cargando,
-                  ),
-                ),
-              ],
+        body: Column(
+          children: [
+            // Barra de herramientas de formato
+            BarraFormato(
+              negrita: negrita,
+              cursiva: cursiva,
+              subrayado: subrayado,
+              onNegritaToggle: () => setState(() => negrita = !negrita),
+              onCursivaToggle: () => setState(() => cursiva = !cursiva),
+              onSubrayadoToggle: () => setState(() => subrayado = !subrayado),
+              onLinkTap: _insertarLink,
             ),
-          ),
+
+            // Contenido editable
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Campo de título
+                      TextField(
+                        controller: controladorTitulo,
+                        enabled: !cargando,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                        decoration: InputDecoration(
+                          hintText: 'Título de la nota',
+                          border: InputBorder.none,
+                          enabled: !cargando,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+
+                      // Selector de categoría
+                      _construirSelectorCategoria(),
+                      const SizedBox(height: 16),
+
+                      // Campo de contenido con estilos
+                      TextField(
+                        controller: controladorContenido,
+                        enabled: !cargando,
+                        focusNode: focusNodeContenido,
+                        maxLines: null,
+                        minLines: 12,
+                        style: _construirEstiloTexto(),
+                        decoration: InputDecoration(
+                          hintText: 'Escribe tu nota aquí...',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          enabled: !cargando,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
+    );
+  }
+
+  /// Construye el estilo de texto basado en los botones seleccionados
+  TextStyle _construirEstiloTexto() {
+    return TextStyle(
+      fontWeight: negrita ? FontWeight.bold : FontWeight.normal,
+      fontStyle: cursiva ? FontStyle.italic : FontStyle.normal,
+      decoration:
+          subrayado ? TextDecoration.underline : TextDecoration.none,
     );
   }
 
@@ -282,4 +325,99 @@ class _EditorNotaState extends State<EditorNota> {
       ),
     );
   }
+}
+
+/// Diálogo para insertar un enlace
+class _DialogoInsercionLink extends StatefulWidget {
+  final Function(String titulo, String url) onAceptar;
+
+  const _DialogoInsercionLink({required this.onAceptar});
+
+  @override
+  State<_DialogoInsercionLink> createState() => _DialogoInsercionLinkState();
+}
+
+class _DialogoInsercionLinkState extends State<_DialogoInsercionLink> {
+  final _tituloController = TextEditingController();
+  final _urlController = TextEditingController();
+
+  @override
+  void dispose() {
+    _tituloController.dispose();
+    _urlController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Insertar enlace'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            controller: _tituloController,
+            decoration: const InputDecoration(
+              labelText: 'Texto del enlace',
+              hintText: 'Ej: Google',
+            ),
+          ),
+          const SizedBox(height: 16),
+          TextField(
+            controller: _urlController,
+            decoration: const InputDecoration(
+              labelText: 'URL',
+              hintText: 'Ej: https://google.com',
+            ),
+            keyboardType: TextInputType.url,
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Cancelar'),
+        ),
+        TextButton(
+          onPressed: () {
+            if (_tituloController.text.isNotEmpty &&
+                _urlController.text.isNotEmpty) {
+              widget.onAceptar(
+                _tituloController.text,
+                _urlController.text,
+              );
+              Navigator.pop(context);
+            }
+          },
+          child: const Text('Insertar'),
+        ),
+      ],
+    );
+  }
+}
+
+void _insertarLink() {
+  showDialog(
+    context: context,
+    builder: (context) => _DialogoInsercionLink(
+      onAceptar: (titulo, url) {
+        final textoLink = '[$titulo]($url)';
+        final posicionCursor =
+            controladorContenido.selection.baseOffset;
+        
+        final textoAnterior =
+            controladorContenido.text.substring(0, posicionCursor);
+        final textoPosteriror =
+            controladorContenido.text.substring(posicionCursor);
+
+        controladorContenido.text =
+            '$textoAnterior$textoLink$textoPosteriror';
+        
+        // Reposicionar cursor
+        controladorContenido.selection = TextSelection.fromPosition(
+          TextPosition(offset: posicionCursor + textoLink.length),
+        );
+      },
+    ),
+  );
 }

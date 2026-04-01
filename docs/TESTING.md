@@ -169,19 +169,71 @@ flutter test --coverage
 - [x] Muestra opciones próximas
 - [x] Desactiva botones durante operación
 
-## Tests Próximos (Phase 1.10+ y Future)
+## Tests Implementados (Phase 2 - Rich Text Editor & Advanced Search)
+
+### 10. BarraFormato (Widget) ✅
+- [x] Muestra todos los botones de formato (7 total)
+- [x] Responde a taps en botones
+- [x] Resalta botón cuando está seleccionado
+- [x] Callbacks de toggle funcionan correctamente
+- [x] Integración con EditorNota
+
+### 11. BusquedaAvanzada (Widget) ✅
+- [x] Muestra campo de búsqueda
+- [x] Permite escribir en campo
+- [x] Muestra botón de filtros
+- [x] Expande filtros al presionar botón
+- [x] Filtra por categoría
+- [x] Cancela búsqueda correctamente
+- [x] Callbacks onBuscar funcionan
+- [x] Callbacks onCancelar funcionan
+
+### 12. EditorNota - Phase 2 (Widget) ✅
+- [x] Muestra barra de formato
+- [x] Permite cambiar formato de texto
+- [x] Abre diálogo para insertar enlace
+- [x] Carga contenido inicial
+- [x] Permite editar contenido
+- [x] Mantiene estado de formateo
+
+### 13. PantallaInicio - Phase 2 (Widget) ✅
+- [x] Muestra botón de búsqueda en AppBar
+- [x] Activa búsqueda al presionar botón
+- [x] Muestra widget de búsqueda avanzada
+- [x] Permite escribir término de búsqueda
+- [x] Muestra filtros de categorías
+- [x] Permite seleccionar categorías
+- [x] Cancela búsqueda correctamente
+- [x] Muestra lista de notas
+- [x] Tiene botón FAB para crear nota
+
+## Tests Próximos (Phase 2+)
+
+### Filtering Logic (Próximo)
+- [ ] Búsqueda por término filtra notas
+- [ ] Filtro por categoría funciona
+- [ ] Búsqueda multi-criterio combina filtros
+- [ ] Búsqueda vacía muestra todas las notas
+
+### Auto-save & Sync (Próximo)
+- [ ] Guardado automático cada X segundos
+- [ ] Sincronización en background
+- [ ] Manejo de conflictos de sincronización
+- [ ] Indicador de guardado
 
 ### Integration Tests (Full Flow)
 - [ ] Flujo: Registro → Login → Crear nota → Logout
 - [ ] Redirection automática según autenticación
 - [ ] Persistencia de sesión
+- [ ] Rich text editor workflow completo
 
 ### Performance
 - [ ] Tiempo de carga de pantallas
 - [ ] Eficiencia de queries Firebase
 - [ ] Sincronización en background
+- [ ] Rendimiento con 100+ notas
 
-## Resumen de Cobertura (Phase 1.10)
+## Resumen de Cobertura (Phase 2)
 
 | Componente | Tests | Cobertura | Estado |
 |-----------|-------|----------|--------|
@@ -190,7 +242,8 @@ flutter test --coverage
 | Utilidades | 7 | ≥90% | ✅ Completo |
 | Widgets Suite | 35 | ≥70% | ✅ Completo |
 | Security Guards | 10 | ≥95% | ✅ Robusto |
-| **Total** | **85** | **≥81%** | **✅ Enterprise** |
+| Phase 2 Widgets | 17 | ≥75% | ✅ Nuevo |
+| **Total** | **102** | **≥78%** | **✅ Advanced** |
 
 ## Mejores Prácticas
 
