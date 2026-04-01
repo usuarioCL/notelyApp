@@ -35,6 +35,14 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/).
   - Manejo de errores con mensajes descriptivos
   - Métodos síncronos y asíncronos según corresponda
 
+- **Integración Frontend-Backend** (Fase 1.6):
+  - Proveedores centralizados en `proveedores_aplicacion.dart`
+  - PantallaInicio: muestra notas en tiempo real con filtrado por categoría
+  - EditorNota: crea y actualiza notas con Firebase
+  - PantallaAjustes: mostrar perfil del usuario, cerrar sesión
+  - StreamBuilders para sincronización en tiempo real
+  - Manejo completo de estados (loading, error, data)
+
 ### Cambiado
 - Actualizar todos los modelos a español: Nota (antes Note), Usuario (antes User)
 - Métodos renombrados a español: aJson/desdeJson, copiarCon
